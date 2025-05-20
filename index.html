@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Paws Bot</title> <!-- CHANGED -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Product+Sans:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="chat-header">
+            <h1 class="logo">
+                <!-- You can simplify the logo spans if you want a simpler color scheme now -->
+                <span class="logo-s">H</span><span class="logo-a1">a</span><span class="logo-r">p</span><span class="logo-c">p</span><span class="logo-a2">y</span>
+                 <span class="logo-b">P</span><span class="logo-o">a</span><span class="logo-t2">w</span><span class="logo-s2">s</span> <!-- CHANGED -->
+            </h1>
+            <div class="header-controls">
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                    <span class="light-icon" aria-hidden="true">🌞</span>
+                    <span class="dark-icon" aria-hidden="true">🌙</span>
+                </button>
+                <div class="model-selector">
+                    <label for="modelSelect" class="visually-hidden">Select AI Model:</label>
+                    <select id="modelSelect" class="model-select">
+                        <option value="llama3-70b-8192">Playful Pup (LLaMA3)</option> <!-- CHANGED -->
+                        <option value="gpt-4-turbo">Wise Owl (GPT-4)</option> <!-- CHANGED -->
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <main class="chat-main-content">
+            <div class="chat-container" id="chatContainer" role="log" aria-live="polite">
+                <!-- Welcome message will be added by script.js -->
+            </div>
+        </main>
+
+        <footer class="input-area">
+            <form id="chatForm" class="input-container">
+                <label for="userInput" class="visually-hidden">Your message:</label>
+                <input type="text" id="userInput" placeholder="Say something nice! Woof!" aria-label="Your message to the bot" class="user-input-field"> <!-- CHANGED -->
+                <button type="button" id="voiceButton" class="icon-button voice-button" title="Record voice" aria-label="Record voice input">
+                    <span class="mic-icon" aria-hidden="true">🎤</span>
+                </button>
+                <button type="submit" id="roastButton" class="action-button roast-button"> <!-- ID kept for JS, text changed -->
+                    <span aria-hidden="true">🐾</span> Chat! <!-- CHANGED -->
+                </button>
+            </form>
+        </footer>
+
+        <audio id="audioPlayer" style="display: none;"></audio>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+:root[data-theme="light"] {
+    --background: #ffffff;
+    --chat-background: #f8f9fa;
+    --text: #202124;
+    --text-secondary: #5f6368;
+    --border: #dadce0;
+    --message-bg: #ffffff; /* Can be removed if messages directly use bot/user specifics */
+    --message-bot: #f8f9fa;
+    --message-user: var(--google-blue);
+    --input-bg: #ffffff;
+    --header-bg: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme="dark"] {
+    --background: #202124;
+    --chat-background: #2d2d2d;
+    --text: #ffffff;
+    --text-secondary: #9aa0a6;
+    --border: #3c4043;
+    --message-bg: #2d2d2d; /* Can be removed */
+    --message-bot: #3c4043;
+    --message-user: #1a73e8; /* A slightly darker blue for dark mode can be good for contrast */
+    --input-bg: #2d2d2d;
+    --header-bg: #2d2d2d;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+:root {
+    --google-blue: #4285F4;
+    --google-red: #EA4335;
+    --google-yellow: #FBBC05;
+    --google-green: #34A853;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Product Sans', Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    display: flex; /* To allow .app-container to fill height if needed, though .app-container is also flex */
+    flex-direction: column;
+}
+
+.app-container { /* Renamed from .container for clarity if body is also flex */
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 20px var(--shadow); /* Optional: add a subtle shadow to the whole app */
+}
+
+.chat-header {
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    background: var(--header-bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 28px; /* Slightly adjusted for responsiveness */
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Specific logo colors from HTML */
+.logo-s { color: var(--google-blue); }
+.logo-a1 { color: var(--google-red); }
+.logo-r { color: var(--google-yellow); }
+.logo-c { color: var(--google-blue); }
+.logo-a2 { color: var(--google-green); }
+.logo-s2 { color: var(--google-red); }
+.logo-t { color: var(--google-blue); }
+.logo-i { color: var(--google-yellow); }
+.logo-c2 { color: var(--google-green); }
+.logo-b { color: var(--google-red); }
+.logo-o { color: var(--google-blue); }
+.logo-t2 { color: var(--google-yellow); }
+
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 36px; /* Slightly smaller */
+    height: 36px; /* Slightly smaller */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px; /* Adjusted */
+    padding: 0;
+    color: var(--text-secondary);
+}
+
+.theme-toggle:hover {
+    background: var(--chat-background);
+    border-color: var(--text-secondary);
+}
+
+[data-theme="light"] .dark-icon {
+    display: none;
+}
+[data-theme="dark"] .light-icon {
+    display: none;
+}
+/* Ensure the correct icon is shown initially by JS, this just handles the switch */
+
+
+.chat-main-content { /* Added a wrapper for main content */
+    flex-grow: 1;
+    display: flex; /* To make chat-container also grow */
+    flex-direction: column;
+    overflow: hidden; /* To contain the chat-container's scroll */
+    background: var(--chat-background);
+}
+
+.chat-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px; /* Slightly adjusted */
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Slightly adjusted */
+
+    /* Firefox scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) var(--chat-background);
+}
+
+.message {
+    max-width: 75%; /* Slightly adjusted */
+    display: flex;
+    flex-direction: column; /* Keeps content, gif, audio button stacked */
+    gap: 8px;
+}
+
+.message.user {
+    align-self: flex-end;
+}
+
+.message.bot {
+    align-self: flex-start;
+}
+
+.message-content {
+    padding: 10px 14px; /* Adjusted */
+    border-radius: 18px; /* More bubbly */
+    box-shadow: 0 1px 2px var(--shadow);
+    line-height: 1.5;
+    font-size: 16px; /* Adjusted */
+    word-wrap: break-word; /* Ensure long words break */
+}
+
+.user .message-content {
+    background: var(--message-user);
+    color: white;
+    border-bottom-right-radius: 4px; /* Chat bubble tail effect */
+}
+
+.bot .message-content {
+    background: var(--message-bot);
+    color: var(--text);
+    border-bottom-left-radius: 4px; /* Chat bubble tail effect */
+}
+
+.gif-container {
+    margin-top: 8px;
+    max-width: 100%; /* Ensure GIF doesn't overflow message bubble */
+}
+
+.gif-container img {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px;
+    display: block; /* Remove extra space below img */
+}
+
+.input-area { /* This is the footer in HTML */
+    background: var(--header-bg);
+    border-top: 1px solid var(--border);
+    padding: 12px 20px; /* Adjusted */
+}
+
+form.input-container { /* Styles applied directly to the form */
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px; /* Adjusted */
+    align-items: center;
+}
+
+input.user-input-field { /* More specific selector */
+    flex-grow: 1;
+    padding: 10px 16px; /* Adjusted */
+    border: 1px solid var(--border);
+    border-radius: 20px; /* Adjusted */
+    font-size: 15px; /* Adjusted */
+    color: var(--text);
+    background: var(--input-bg);
+}
+
+input.user-input-field:focus {
+    outline: none;
+    border-color: var(--google-blue);
+    box-shadow: 0 0 0 2px var(--google-blue-transparent, rgba(66, 133, 244, 0.2)); /* Softer focus ring */
+}
+
+.model-select {
+    padding: 8px 12px; /* Adjusted */
+    border: 1px solid var(--border);
+    border-radius: 20px; /* Adjusted */
+    background: var(--input-bg);
+    color: var(--text);
+    font-size: 13px; /* Adjusted */
+    cursor: pointer;
+    min-width: 120px; /* Give it some base width */
+}
+
+.icon-button, .action-button { /* Common styles for buttons */
+    border: none;
+    border-radius: 50%; /* Default to round, can be overridden */
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, transform 0.2s;
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
+.voice-button {
+    background: var(--google-blue);
+    color: white;
+    width: 38px; /* Adjusted */
+    height: 38px; /* Adjusted */
+}
+
+.voice-button:hover {
+    background: #3367d6; /* Darker shade of google blue */
+}
+
+.voice-button.recording {
+    background: var(--google-red);
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.mic-icon { /* This class is on the span inside the voice button */
+    font-size: 18px;
+}
+
+.action-button.roast-button { /* Specific for roast button */
+    background: var(--google-red);
+    color: white;
+    border-radius: 20px; /* Rectangular with rounded corners */
+    padding: 9px 16px; /* Adjusted */
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 80px;
+}
+
+.action-button.roast-button:hover {
+    background: #c53929; /* Darker shade of google red */
+}
+
+.audio-control {
+    background: var(--message-user); /* Use user message color for consistency */
+    color: white;
+    border: none;
+    border-radius: 18px; /* Match message bubble */
+    padding: 6px 12px; /* Adjusted */
+    font-size: 13px; /* Adjusted */
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 8px;
+    align-self: flex-start; /* Stays good */
+    display: inline-flex; /* To align icon and text */
+    align-items: center;
+    gap: 6px;
+}
+
+.audio-control:hover {
+    background-color: #3367d6; /* Darker shade of the user message blue */
+}
+
+.audio-control .control-text { /* Class added in JS for the "Play/Pause" text */
+    display: inline-block;
+}
+.audio-control .pause-icon,
+.audio-control .play-icon { /* Spans for icons */
+    font-size: 14px;
+}
+
+.audio-control.playing .play-icon,
+.audio-control.playing .control-text:not(:empty)::before { /* Complex way to change text, better done in JS */
+    display: none;
+}
+
+.audio-control.playing .pause-icon {
+    display: inline;
+}
+/* JS should handle changing the text content of .control-text */
+
+
+/* Visually hidden class for accessibility */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    white-space: nowrap;
+}
+
+/* Keyframes */
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(234, 67, 53, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(234, 67, 53, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(234, 67, 53, 0); }
+}
+
+
+/* Webkit scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent; /* Make it less intrusive */
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}

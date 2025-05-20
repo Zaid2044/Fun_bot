@@ -1,0 +1,11 @@
+Flask
+Flask-CORS
+python-dotenv
+requests
+groq
+elevenlabs
+transformers
+torch
+torchvision
+torchaudio
+sentencepiece
