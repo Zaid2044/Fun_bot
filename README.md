@@ -21,15 +21,25 @@ The bot uses Groq for Large Language Model (LLM) responses, ElevenLabs for Text-
 
 your_project_root_directory/
 └── main_folder/
+
 └── bot/
+
 ├── .env # Stores API keys (IMPORTANT: Keep this private!)
+
 ├── bot.py # Flask backend application
+
 ├── index.html # Main HTML file for the frontend
+
 ├── requirements.txt # Python dependencies
+
 ├── README.md # This file
+
 ├── static/
+
 │ ├── script.js # Frontend JavaScript logic
+
 │ └── style.css # CSS styles for the frontend
+
 └── venv/ # Python virtual environment (created by user)
 
 ## Prerequisites
@@ -58,55 +68,26 @@ Follow these steps to set up and run the Happy Paws Bot locally:
    Open your terminal or command prompt, navigate to the project's `bot` directory:
    ```bash
    cd path/to/your/main_folder/bot
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-IGNORE_WHEN_COPYING_END
 
 Create the virtual environment:
 
 python -m venv venv
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Bash
-IGNORE_WHEN_COPYING_END
 
 Activate the virtual environment:
 
 Windows (PowerShell):
 
 .\venv\Scripts\Activate.ps1
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Powershell
-IGNORE_WHEN_COPYING_END
 
 (If you encounter an execution policy error, you might need to run Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process first in that PowerShell session.)
 
 Windows (Command Prompt):
 
 .\venv\Scripts\activate.bat
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Cmd
-IGNORE_WHEN_COPYING_END
 
 macOS / Linux:
 
 source venv/bin/activate
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Bash
-IGNORE_WHEN_COPYING_END
 
 Your terminal prompt should now indicate that the (venv) is active.
 
@@ -115,12 +96,6 @@ Your terminal prompt should now indicate that the (venv) is active.
 With the virtual environment active, install the required Python packages using the requirements.txt file:
 
 pip install -r requirements.txt
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Bash
-IGNORE_WHEN_COPYING_END
 
 This will install Flask, Flask-CORS, python-dotenv, requests, groq, elevenlabs, transformers, torch, torchvision, torchaudio, and sentencepiece. The torch installation will be CPU-based by default.
 
@@ -141,12 +116,6 @@ Ensure your virtual environment (venv) is active and you are in the bot director
 Run the Python application:
 
 python bot.py
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Bash
-IGNORE_WHEN_COPYING_END
 
 You should see output indicating the Flask server is running, typically on http://127.0.0.1:5000 or http://localhost:5000. The output will also confirm that the Whisper model is loading (this might take a few moments the first time as models are downloaded).
 
@@ -163,22 +132,12 @@ WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://127.0.0.1:5000
 Press CTRL+C to quit
 ...
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-IGNORE_WHEN_COPYING_END
 
 2. Access the Bot in Your Web Browser:
 
 Open your web browser and navigate to:
 
 http://localhost:5000/
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-IGNORE_WHEN_COPYING_END
 
 (or http://127.0.0.1:5000/)
 
